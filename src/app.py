@@ -38,6 +38,42 @@ activities = {
         "schedule": "Mondays, Wednesdays, Fridays, 2:00 PM - 3:00 PM",
         "max_participants": 30,
         "participants": ["john@mergington.edu", "olivia@mergington.edu"]
+    },
+    "Soccer Team": {
+        "description": "Team-based soccer training and matches",
+        "schedule": "Tuesdays and Thursdays, 4:00 PM - 5:30 PM",
+        "max_participants": 25,
+        "participants": ["alex@mergington.edu", "maria@mergington.edu"]
+    },
+    "Swim Club": {
+        "description": "Swimming techniques and competitive practice",
+        "schedule": "Mondays, Wednesdays, Fridays, 4:00 PM - 5:00 PM",
+        "max_participants": 20,
+        "participants": ["kevin@mergington.edu", "sara@mergington.edu"]
+    },
+    "Art Club": {
+        "description": "Painting, drawing, and creative studio time",
+        "schedule": "Wednesdays, 3:30 PM - 5:00 PM",
+        "max_participants": 18,
+        "participants": ["lucy@mergington.edu", "sam@mergington.edu"]
+    },
+    "Drama Club": {
+        "description": "Theater production, acting workshops, and performances",
+        "schedule": "Fridays, 4:00 PM - 6:00 PM",
+        "max_participants": 20,
+        "participants": ["mike@mergington.edu", "nina@mergington.edu"]
+    },
+    "Math Olympiad": {
+        "description": "Advanced problem solving and competition preparation",
+        "schedule": "Tuesdays, 3:30 PM - 5:00 PM",
+        "max_participants": 15,
+        "participants": ["hana@mergington.edu", "liam@mergington.edu"]
+    },
+    "Science Club": {
+        "description": "Experiments, research projects, and science fair prep",
+        "schedule": "Thursdays, 3:30 PM - 5:00 PM",
+        "max_participants": 20,
+        "participants": ["noah@mergington.edu", "mia@mergington.edu"]
     }
 }
 
@@ -61,6 +97,9 @@ def signup_for_activity(activity_name: str, email: str):
 
     # Get the specific activity
     activity = activities[activity_name]
+
+# Validate student is not already signed up
+ 
 
     # Add student
     activity["participants"].append(email)
