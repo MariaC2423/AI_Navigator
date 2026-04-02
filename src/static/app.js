@@ -10,8 +10,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await fetch("/activities");
       const activities = await response.json();
 
-      // Clear loading message
+      // Clear loading message and dropdown
       activitiesList.innerHTML = "";
+      // Clear dropdown except for the placeholder
+      activitySelect.innerHTML = '<option value="">-- Select an activity --</option>';
 
       // Populate activities list
       Object.entries(activities).forEach(([name, details]) => {
@@ -23,12 +25,12 @@ document.addEventListener("DOMContentLoaded", () => {
         let participantsHtml = "";
         if (details.participants.length) {
           participantsHtml = details.participants.map((p) =>
-            `<span class="participant-item">${p}
-              <button class="delete-participant" title="Remove participant" data-activity="${encodeURIComponent(name)}" data-email="${encodeURIComponent(p)}">&#128465;</button>
+            `<span class=\"participant-item\">${p}
+              <button class=\"delete-participant\" title=\"Remove participant\" data-activity=\"${encodeURIComponent(name)}\" data-email=\"${encodeURIComponent(p)}\">&#128465;</button>
             </span>`
           ).join("");
         } else {
-          participantsHtml = `<span class="no-participants">No participants yet</span>`;
+          participantsHtml = `<span class=\"no-participants\">No participants yet</span>`;
         }
 
         activityCard.innerHTML = `
@@ -36,9 +38,9 @@ document.addEventListener("DOMContentLoaded", () => {
           <p>${details.description}</p>
           <p><strong>Schedule:</strong> ${details.schedule}</p>
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
-          <div class="participants-section">
+          <div class=\"participants-section\">
             <strong>Participants:</strong>
-            <div class="participants-list">${participantsHtml}</div>
+            <div class=\"participants-list\">${participantsHtml}</div>
           </div>
         `;
 
@@ -64,7 +66,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if (response.ok) {
               messageDiv.textContent = result.message;
               messageDiv.className = "success";
-              fetchActivities();
+              await fetchActivities();
             } else {
               messageDiv.textContent = result.detail || "An error occurred";
               messageDiv.className = "error";
@@ -106,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
         messageDiv.textContent = result.message;
         messageDiv.className = "success";
         signupForm.reset();
-        fetchActivities();
+        await fetchActivities();
       } else {
         messageDiv.textContent = result.detail || "An error occurred";
         messageDiv.className = "error";
